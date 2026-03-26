@@ -1,10 +1,12 @@
 import pygame
 from sprite import Sprite
 from input import is_key_pressed
+from config import *
+
 
 class Player(Sprite):
-    def __init__(self, image, x, y):
-        super().__init__(image, x, y)
+    def __init__(self):
+        super().__init__(PLAYER_PATH, PLAYER_X, PLAYER_Y)
         self.movement_speed = 5
 
     def update(self):

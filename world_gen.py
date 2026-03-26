@@ -1,21 +1,23 @@
 from perlin_noise import PerlinNoise
 from config import *
+from file_handler import *
 
 
 class World:
 
     def __init__(self, size_x, size_y, random_seed):
+        self.noise_map = []
         self.generate_noisemap(size_x, size_y, random_seed)
 
         # Get min and max noise values
         flat_list = [item for sublist in self.noise_map for item in sublist]
         self.min_value = min(flat_list)
         self.max_value = max(flat_list)
+        self.tile_map = self.get_tiled_map(WEIGHTS1)
+        matrix_saver(MAP_PATH, self.tile_map)
 
-
+    # Generating random noise map matrix (floats)
     def generate_noisemap(self, size_x, size_y, random_seed):
-        self.noise_map = []
-
         noise1 = PerlinNoise(octaves=3, seed=random_seed)
         noise2 = PerlinNoise(octaves=6, seed=random_seed)
         noise3 = PerlinNoise(octaves=12, seed=random_seed)
@@ -32,24 +34,13 @@ class World:
                 row.append(noise_val)
             self.noise_map.append(row)
 
-
     def get_noise_map(self):
         return self.noise_map
 
-    def print_noise_map(self):
-        for i in self.noise_map:
-            for j in i:
-                print(j)
-            print()
-        print(self.min_value, self.max_value)
-
-
-
-    def get_tiled_map(self, weights = [40, 30, 80]):
+    # Generating an int matrix with terrain types from config
+    def get_tiled_map(self, weights):
         total_weights = sum(weights)
         total_range = self.max_value - self.min_value
-
-        ALL_TERRAIN_TYPES = [0, 1, 2]
 
         # calculate maximum height for each terrain type, based on weight values
         max_terrain_heights = []
@@ -58,7 +49,7 @@ class World:
             height = total_range * (weights[terrain_type] / total_weights) + previous_height
             max_terrain_heights.append(height)
             previous_height = height
-        #max_terrain_heights[SNOW] = self.max_value
+        # max_terrain_heights[SNOW] = self.max_value
 
         map_int = []
 

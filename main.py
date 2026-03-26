@@ -2,34 +2,25 @@ import pygame
 import input
 from player import Player
 from sprite import sprites, Sprite
-from map import TileKind, Map
+from map import Map
 from world_gen import World
+from config import *
 
+# Window init
 pygame.init()
-
 pygame.display.set_caption("MyCraft")
 
+# World gen with configs
+w1 = World(WORLD_SIZE_X, WORLD_SIZE_Y, RANDOM_SEED)
+# World.print_noise_map(w1) #debug
 
-w1 = World(80, 50, 33)
-World.print_noise_map(w1)
-for row in World.get_tiled_map(w1):
-    for tile in row:
-        print(tile, end="")
-    print()
-
-
-screen = pygame.display.set_mode((1920, 1080))
-clear_c = (20, 151, 20)
+screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+# clear_c = (20, 151, 20)
 running = True
-player = Player("images/player.png", 0 , 0)
-tile_kinds = [
-    TileKind("dirt", "images/dirt.png", False),
-    TileKind("grass", "images/grass.png", False),
-    TileKind("wood", "images/wood.png", False)
-]
 
-map = Map("maps/start.map", tile_kinds, 32)
-#Sprite("images/tree.png",0,0)
+game_map = Map(TILE_SIZE)
+player = Player()
+# Sprite("images/tree.png",0,0)
 
 while running:
     for event in pygame.event.get():
@@ -39,21 +30,18 @@ while running:
             input.keys_down.add(event.key)
         elif event.type == pygame.KEYUP:
             input.keys_down.remove(event.key)
-    #update
+    # update
     player.update()
 
+    # draw
+    # screen.fill(clear_c)
 
-    #draw
-    screen.fill(clear_c)
-
-    map.draw(screen)
+    game_map.draw(screen)
 
     for s in sprites:
         s.draw(screen)
     pygame.display.flip()
 
-    #pygame.time.delay(1)
-
-
+    pygame.time.delay(1)
 
 pygame.quit()
