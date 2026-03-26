@@ -3,10 +3,20 @@ import input
 from player import Player
 from sprite import sprites, Sprite
 from map import TileKind, Map
+from world_gen import World
 
 pygame.init()
 
 pygame.display.set_caption("MyCraft")
+
+
+w1 = World(80, 50, 33)
+World.print_noise_map(w1)
+for row in World.get_tiled_map(w1):
+    for tile in row:
+        print(tile, end="")
+    print()
+
 
 screen = pygame.display.set_mode((1920, 1080))
 clear_c = (20, 151, 20)
@@ -43,6 +53,7 @@ while running:
     pygame.display.flip()
 
     #pygame.time.delay(1)
+
 
 
 pygame.quit()
