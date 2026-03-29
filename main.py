@@ -19,7 +19,7 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 running = True
 
 game_map = Map(TILE_SIZE)
-player = Player()
+player = Player(PLAYER_PATH, PLAYER_X, PLAYER_Y, game_map.obstacles)
 # Sprite("images/tree.png",0,0)
 
 while running:
