@@ -9,11 +9,11 @@ WORLD_SIZE_Y = 32
 
 MAP_PATH = "maps/start.map"
 PLAYER_PATH = "images/player.png"
-PLAYER_X = 0
-PLAYER_Y = 0
+PLAYER_START_X = 0
+PLAYER_START_Y = 0
 
-RANDOM_SEED = random.randint(1, 900000)
-WEIGHTS1 = [30, 40, 100, 40]
+#RANDOM_SEED = random.randint(1, 900000)
+TILING_WEIGHTS = [30, 40, 100, 40]
 
 TILE_SIZE = 32
 

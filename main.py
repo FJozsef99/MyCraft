@@ -11,7 +11,7 @@ pygame.init()
 pygame.display.set_caption("MyCraft")
 
 # World gen with configs
-w1 = World(WORLD_SIZE_X, WORLD_SIZE_Y, RANDOM_SEED)
+World(WORLD_SIZE_X, WORLD_SIZE_Y)
 # World.print_noise_map(w1) #debug
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))

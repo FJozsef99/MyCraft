@@ -5,15 +5,16 @@ from file_handler import *
 
 class World:
 
-    def __init__(self, size_x, size_y, random_seed):
+    def __init__(self, size_x, size_y):
         self.noise_map = []
+        random_seed = random.randint(1, 900000)
         self.generate_noisemap(size_x, size_y, random_seed)
 
         # Get min and max noise values
         flat_list = [item for sublist in self.noise_map for item in sublist]
         self.min_value = min(flat_list)
         self.max_value = max(flat_list)
-        self.tile_map = self.get_tiled_map(WEIGHTS1)
+        self.tile_map = self.get_tiled_map(TILING_WEIGHTS)
         matrix_saver(MAP_PATH, self.tile_map)
 
     # Generating random noise map matrix (floats)
@@ -34,8 +35,8 @@ class World:
                 row.append(noise_val)
             self.noise_map.append(row)
 
-    def get_noise_map(self):
-        return self.noise_map
+    # def get_noise_map(self):
+    #     return self.noise_map
 
     # Generating an int matrix with terrain types from config
     def get_tiled_map(self, weights):
