@@ -1,11 +1,13 @@
 import file_handler
 from config import *
+from obstacle import Obstacle
 
 
 class Map:
     def __init__(self, tile_size):
         self.tile_size = tile_size
         self.tile_images = []
+        self.obstacles = pygame.sprite.Group()
 
         for s in TILE_PATHS:
             img = pygame.transform.scale(pygame.image.load(s), (TILE_SIZE, TILE_SIZE))

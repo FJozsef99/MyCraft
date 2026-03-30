@@ -4,20 +4,23 @@ sprites = []
 loaded = {}
 
 
-class Sprite:
-    def __init__(self, image, x, y):
-        if image in loaded:
-            self.image = loaded[image]
+class Sprite(pygame.sprite.Sprite):
+    def __init__(self, image_path, x, y):
+        super().__init__()
+        if image_path in loaded:
+            self.image = loaded[image_path]
         else:
-            self.image = pygame.transform.scale(pygame.image.load(image), (32,32))
-            loaded[image] = self.image
+            self.image = pygame.transform.scale(pygame.image.load(image_path), (32, 32))
+            loaded[image_path] = self.image
 
-        self.x = x
-        self.y = y
+        # self.x = x
+        # self.y = y
+        self.rect = self.image.get_rect(topleft=(x, y))
+
         sprites.append(self)
 
     def delete(self):
         sprites.remove(self)
 
     def draw(self, screen):
-        screen.blit(self.image, (self.x, self.y))
+        screen.blit(self.image, self.rect.topleft)

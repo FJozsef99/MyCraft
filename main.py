@@ -1,7 +1,7 @@
 import pygame
 import input
 from player import Player
-from sprite import sprites, Sprite
+from sprite import sprites
 from map import Map
 from world_gen import World
 from config import *
@@ -19,7 +19,7 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 running = True
 
 game_map = Map(TILE_SIZE)
-player = Player()
+player = Player(game_map.obstacles)
 # Sprite("images/tree.png",0,0)
 
 while running:
