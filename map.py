@@ -1,7 +1,5 @@
-import pygame
-
-from config import *
 import file_handler
+from config import *
 from obstacle import Obstacle
 
 

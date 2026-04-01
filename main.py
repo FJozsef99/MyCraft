@@ -1,7 +1,7 @@
 import pygame
 import input
 from player import Player
-from sprite import sprites, Sprite
+from sprite import sprites
 from map import Map
 from world_gen import World
 from config import *
@@ -11,7 +11,7 @@ pygame.init()
 pygame.display.set_caption("MyCraft")
 
 # World gen with configs
-w1 = World(WORLD_SIZE_X, WORLD_SIZE_Y, RANDOM_SEED)
+World(WORLD_SIZE_X, WORLD_SIZE_Y)
 # World.print_noise_map(w1) #debug
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -19,7 +19,7 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 running = True
 
 game_map = Map(TILE_SIZE)
-player = Player(PLAYER_PATH, PLAYER_X, PLAYER_Y, game_map.obstacles)
+player = Player(game_map.obstacles)
 # Sprite("images/tree.png",0,0)
 
 while running:
