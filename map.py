@@ -18,10 +18,13 @@ class Map:
 
         # Load tile numbers from map_data into [self.tiles]
         self.tiles = []
-        for line in map_data.split("\n"):
+        for y, line in enumerate(map_data.split("\n")):
             row = []
-            for tile_number in line:
-                row.append(int(tile_number))
+            for x, tile_number in enumerate(line):
+                if tile_number == '2':
+                    self.obstacles.add(Obstacle("images/wood.png", x * tile_size, y * tile_size))
+                else:
+                    row.append(int(tile_number))
             self.tiles.append(row)
 
     # Draws the tiles on screen
