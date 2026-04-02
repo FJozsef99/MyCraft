@@ -21,10 +21,10 @@ class Map:
         for y, line in enumerate(map_data.split("\n")):
             row = []
             for x, tile_number in enumerate(line):
-                if tile_number == '2':
-                    self.obstacles.add(Obstacle("images/wood.png", x * tile_size, y * tile_size))
-                else:
-                    row.append(int(tile_number))
+                # if tile_number == '2':
+                #     self.obstacles.add(Obstacle("images/wood.png", x * tile_size, y * tile_size))
+                # else:
+                row.append(int(tile_number))
             self.tiles.append(row)
 
     # Draws the tiles on screen
